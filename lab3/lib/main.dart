@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-/// ======================================================
 /// EXERCISE 1 - Product Model & Repository
-/// ======================================================
 
 class Product {
   final int id;
@@ -48,10 +46,7 @@ class ProductRepository {
   }
 }
 
-/// ======================================================
 /// EXERCISE 2 - User Repository with JSON
-/// ======================================================
-
 class User {
   final String name;
   final String email;
@@ -92,9 +87,7 @@ class UserRepository {
   }
 }
 
-/// ======================================================
 /// EXERCISE 3 - Async + Microtask Debugging
-/// ======================================================
 
 void microtaskExample() {
   print('\n=== Exercise 3 ===');
@@ -127,9 +120,9 @@ void microtaskExample() {
   */
 }
 
-/// ======================================================
+
 /// EXERCISE 4 - Stream Transformation
-/// ======================================================
+ 
 
 Future<void> streamTransformationExample() async {
   print('\n=== Exercise 4 ===');
@@ -154,10 +147,7 @@ Future<void> streamTransformationExample() async {
   */
 }
 
-/// ======================================================
 /// EXERCISE 5 - Factory Constructors & Cache
-/// ======================================================
-
 class Settings {
   static final Settings _instance = Settings._internal();
 
@@ -169,42 +159,25 @@ class Settings {
     return _instance;
   }
 }
-
-/// ======================================================
 /// MAIN FUNCTION
-/// ======================================================
-
 Future<void> main() async {
-  /// --------------------------------------------------
   /// Exercise 1
-  /// --------------------------------------------------
-
   print('=== Exercise 1 ===');
-
   ProductRepository productRepo = ProductRepository();
-
   // Listen realtime stream
   productRepo.liveAdded().listen((product) {
     print('New Product Added: $product');
   });
-
   // Lấy danh sách sản phẩm
   List<Product> products = await productRepo.getAll();
-
   print('All Products:');
   for (var product in products) {
     print(product);
   }
-
   // Giả lập thêm realtime product
   productRepo.addProduct(Product(3, 'Keyboard', 45));
-
   await Future.delayed(Duration(seconds: 1));
-
-  /// --------------------------------------------------
   /// Exercise 2
-  /// --------------------------------------------------
-
   print('\n=== Exercise 2 ===');
 
   UserRepository userRepo = UserRepository();
@@ -214,37 +187,20 @@ Future<void> main() async {
   for (var user in users) {
     print(user);
   }
-
-  /// --------------------------------------------------
   /// Exercise 3
-  /// --------------------------------------------------
-
   microtaskExample();
 
   // Delay để thấy rõ thứ tự output
   await Future.delayed(Duration(seconds: 1));
-
-  /// --------------------------------------------------
   /// Exercise 4
-  /// --------------------------------------------------
-
   await streamTransformationExample();
-
-  /// --------------------------------------------------
   /// Exercise 5
-  /// --------------------------------------------------
-
   print('\n=== Exercise 5 ===');
 
   Settings a = Settings();
   Settings b = Settings();
 
   print('Same instance: ${identical(a, b)}');
-
-  /*
-    Expected:
-    true
-  */
 
   productRepo.dispose();
 }
